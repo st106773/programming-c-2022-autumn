@@ -4,8 +4,6 @@ int main(int argc, char* argv[])
 {
 	int n = 0;
 	int k = 0;
-	int x = 0;
-
 	scanf_s("%d", &n);
 
 	int* a = new int[n] {0};
