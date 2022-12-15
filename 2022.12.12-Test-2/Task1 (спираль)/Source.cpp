@@ -3,45 +3,54 @@
 int** array(int n)
 {
 	int** r = new int* [n];
+
 	for (int i = 0; i < n; ++i)
 	{
 		r[i] = new int[n] {0};
 	}
 	return r;
 }
-int** s(int** arr, int x, int y, int i, int n, int l)
+void del(int** arr, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		delete[] arr[i];
+	}
+	delete[] arr;
+}
+int** s(int** arr, int x, int y, int i, int n, int z)
 {
 	if (i > n * n)
 	{
 		return arr;
 	}
-	if (y < n - l && x == l - 1)
+	if (y < n - z && x == z - 1)
 	{
 		if (arr[x][y])
 		{
 			arr[++x][++y] = i;
-			return s(arr, x, ++y, ++i, n, ++l);
+			return s(arr, x, ++y, ++i, n, ++z);
 		}
 		else
 		{
 			arr[x][y] = i;
-			return s(arr, x, ++y, ++i, n, l);
+			return s(arr, x, ++y, ++i, n, z);
 		}
 	}
-	else if (y == n - l && x < n - l)
+	else if (y == n - z && x < n - z)
 	{
 		arr[x][y] = i;
-		return s(arr, ++x, y, ++i, n, l);
+		return s(arr, ++x, y, ++i, n, z);
 	}
-	else if (y > l - 1 && x == n - l)
+	else if (y > z - 1 && x == n - z)
 	{
 		arr[x][y] = i;
-		return s(arr, x, --y, ++i, n, l);
+		return s(arr, x, --y, ++i, n, z);
 	}
-	else if (y == l - 1 && x >= l)
+	else if (y == z - 1 && x >= z)
 	{
 		arr[x][y] = i;
-		return s(arr, --x, y, ++i, n, l);
+		return s(arr, --x, y, ++i, n, z);
 	}
 }
 int main(int argc, char* argv[])
@@ -60,6 +69,6 @@ int main(int argc, char* argv[])
 		}
 		std::cout << std::endl;
 	}
-	delete[] a;
+	del(a, n);
 	return EXIT_SUCCESS;
 }
