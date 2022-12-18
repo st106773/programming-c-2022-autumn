@@ -1,10 +1,20 @@
 #include <iostream>
+
+void del(int** arr, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		delete[] arr[i];
+	}
+	delete[] arr;
+}
+
 int main(int argc, char* argv[])
 {
 	int n = 0;
 	scanf_s("%d", &n);
-
 	int** a = new int* [n];
+
 	for (int i = 0; i < n; ++i)
 	{
 		a[i] = new int[n] {0};
@@ -24,6 +34,6 @@ int main(int argc, char* argv[])
 		}
 		std::cout << std::endl;
 	}
-	delete[] a;
+	del(a, n);
 	return EXIT_SUCCESS;
 }

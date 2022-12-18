@@ -1,9 +1,18 @@
 #include <iostream>
 
+void del(int** arr, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		delete[] arr[i];
+	}
+	delete[] arr;
+}
+
 int main(int argc, char* argv[])
 {
-	int m = 0;
 	int n = 0;
+	int m = 0;
 	scanf_s("%d%d", &n, &m);
 
 	int** a = new int* [n];
@@ -19,7 +28,6 @@ int main(int argc, char* argv[])
 		for (int j = 0; j < m; ++j)
 		{
 			scanf_s("%d", &a[i][j]);
-
 			string[i] += a[i][j];
 			column[j] += a[i][j];
 		}
@@ -29,11 +37,13 @@ int main(int argc, char* argv[])
 		std::cout << string[i] << " ";
 	}
 	std::cout << std::endl;
+
 	for (int i = 0; i < m; ++i)
 	{
 		std::cout << column[i] << " ";
 	}
 	std::cout << std::endl << std::endl;
+
 	for (int i = 0; i < n; ++i)
 	{
 		for (int j = 0; j < m; ++j)
@@ -42,7 +52,7 @@ int main(int argc, char* argv[])
 		}
 		std::cout << std::endl;
 	}
-	delete[] a;
+	del(a, n);
 	delete[] string;
 	delete[] column;
 	return EXIT_SUCCESS;
